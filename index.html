@@ -3,70 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KhabarSetu - हर खबर, एक जगह | Jaipur News</title>
-<meta name="description" content="KhabarSetu - Rajasthan, Jaipur, India ki taza khabrein">
-<!-- ADSENSE - Yahan apna ca-pub- code paste karna hai jab mile -->
-<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX"></script> -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Noto+Sans+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+<title>KhabarSetu - हर खबर, एक जगह</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Noto+Sans+Devanagari:wght@600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f8fafc;--card:#ffffff;--text:#0f172a;--soft:#64748b;--border:#e2e8f0;--primary:#dc2626;--shadow:0 4px 20px rgba(15,23,42,.06);--radius:14px}
+:root{--bg:#f8fafc;--card:#fff;--text:#0f172a;--soft:#64748b;--border:#e2e8f0;--primary:#dc2626;--shadow:0 4px 20px rgba(15,23,42,.06);--radius:16px}
 *{margin:0;padding:0;box-sizing:border-box} body{font-family:'Inter','Noto Sans Devanagari',system-ui;background:var(--bg);color:var(--text)}
-.container{max-width:1320px;margin:0 auto;padding:0 12px} @media(min-width:640px){.container{padding:0 16px}} @media(min-width:1024px){.container{padding:0 24px}}
-.header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.header-top{display:flex;align-items:center;justify-content:space-between;height:56px} @media(min-width:768px){.header-top{height:64px}}
-.brand{display:flex;align-items:center;gap:8px} .logo-mark{width:36px;height:36px;border-radius:10px;background:var(--primary);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
-.brand-name{font-weight:800;font-size:18px} .brand-name span{color:var(--primary)}
-.nav{display:flex;gap:6px;overflow:auto;padding:10px 0} .nav a{white-space:nowrap;padding:6px 14px;border-radius:999px;border:1px solid var(--border);font-size:14px;font-weight:600} .nav a.active{background:var(--text);color:#fff;border-color:var(--text)}
-.hero{margin:16px 0;display:grid;gap:16px} @media(min-width:900px){.hero{grid-template-columns:1.7fr .9fr}}
-.hero-main{position:relative;border-radius:var(--radius);overflow:hidden;min-height:380px;background:#000;box-shadow:var(--shadow)}
-.hero-main img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.92} .hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85) 10%,rgba(0,0,0,.1) 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
-.badge{display:inline-block;background:var(--primary);color:#fff;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:8px}
-.hero-title{color:#fff;font-size:22px;line-height:1.25;font-weight:800} @media(min-width:768px){.hero-title{font-size:28px}} .hero-meta{color:#e2e8f0;font-size:13px;margin-top:8px}
-.side-list{display:flex;flex-direction:column;gap:12px} .side-card{display:flex;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px;box-shadow:var(--shadow)}
-.side-card img{width:96px;height:72px;border-radius:10px;object-fit:cover;flex-shrink:0} .side-card h4{font-size:14px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.grid{margin-top:8px;display:grid;gap:16px;grid-template-columns:repeat(2,1fr)} @media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr)}} @media(min-width:1100px){.grid{grid-template-columns:repeat(4,1fr)}}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
-.card img{width:100%;height:160px;object-fit:cover} .card-body{padding:12px} .card-body h3{font-size:15px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:40px}
-.card-meta{font-size:12px;color:var(--soft);margin-top:6px}
-.easy-box{background:#fffbeb;border:2px dashed #f59e0b;padding:12px;border-radius:12px;margin:16px 0;font-size:13px}
+.container{max-width:1320px;margin:0 auto;padding:0 14px} @media(min-width:768px){.container{padding:0 20px}}
+.header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.header-top{height:60px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px} .logo{width:38px;height:38px;border-radius:10px;background:var(--primary);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+.brand-name{font-weight:800;font-size:19px} .brand-name span{color:var(--primary)}
+.nav{display:flex;gap:8px;overflow:auto;padding:10px 0;scrollbar-width:none} .nav a{white-space:nowrap;padding:7px 16px;border-radius:999px;border:1px solid var(--border);font-size:14px;font-weight:600;background:var(--card);text-decoration:none;color:var(--text)}
+.nav a.active{background:var(--text);color:#fff;border-color:var(--text)}
+.hero{margin:18px 0;display:grid;gap:16px} @media(min-width:900px){.hero{grid-template-columns:1.8fr .9fr}}
+.hero-main{position:relative;border-radius:var(--radius);overflow:hidden;min-height:400px;background:#000;box-shadow:var(--shadow);display:block;text-decoration:none}
+.hero-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover} .hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.88) 8%,rgba(0,0,0,.1) 65%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
+.badge{background:var(--primary);color:#fff;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:700;width:fit-content;margin-bottom:10px}
+.hero-title{color:#fff;font-size:24px;line-height:1.25;font-weight:800} @media(min-width:768px){.hero-title{font-size:30px}} .hero-meta{color:#cbd5e1;font-size:13px;margin-top:10px}
+.side{display:flex;flex-direction:column;gap:12px}
+.side-card{display:flex;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px;box-shadow:var(--shadow);text-decoration:none;color:var(--text)}
+.side-card img{width:100px;height:76px;border-radius:10px;object-fit:cover;flex-shrink:0} .side-card h4{font-size:14px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.grid{margin-top:10px;display:grid;gap:16px;grid-template-columns:repeat(2,1fr)} @media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr)}} @media(min-width:1100px){.grid{grid-template-columns:repeat(4,1fr)}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;text-decoration:none;color:var(--text)}
+.card img{width:100%;height:165px;object-fit:cover} .card-body{padding:12px} .card-body h3{font-size:15px;line-height:1.35;min-height:42px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta{font-size:12px;color:var(--soft);margin-top:6px}
+.footer{margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--soft);font-size:13px}
 </style>
 </head>
 <body>
 <header class="header">
 <div class="container header-top">
-<div class="brand"><div class="logo-mark">K</div><div class="brand-name">Khabar<span>Setu</span></div></div>
+<div class="brand"><div class="logo">K</div><div class="brand-name">Khabar<span>Setu</span></div></div>
 <div style="font-size:12px;color:var(--soft)">Jamwa Ramgarh • Jaipur</div>
 </div>
-<div class="container"><nav class="nav"><a class="active" href="#">All</a><a href="#">राजस्थान</a><a href="#">India</a><a href="#">शिक्षा</a><a href="#">Jobs</a><a href="#">Breaking</a></nav></div>
+<div class="container"><nav class="nav"><a class="active" href="#">All News</a><a href="#">राजस्थान</a><a href="#">India</a><a href="#">शिक्षा</a><a href="#">Jobs</a></nav></div>
 </header>
-
 <main class="container">
-
-<div class="easy-box">
-<b>🔥 YAHAN SE NEWS ADD KARO - FUTURE KE LIYE 🔥</b><br>
-Agli baar khabar dalne ke liye is file me Line 95-120 ke beech <code>PASTE HERE</code> me naya block paste karo. Upar hi milega!
-</div>
-
 <script>
-// =================================================================
-// YAHAN SE NEWS SHURU - NAYI KHABAR YAHAN ADD KARO
-// =================================================================
-const MY_NEWS = [
-  // PASTE HERE - NAYI KHABAR YAHAN PASTE KARO (SABSE UPAR)
+// YAHAN NAYI KHABAR ADD KARO - SABSE UPAR PASTE KARO
+const NEWS = [
   {
-    id: 1010,
+    id: 1004,
     title: "जयपुर में Hawa Mahal पर नया लाइट शो शुरू, शाम 7 बजे से पर्यटकों की भीड़",
-    summary: "Jaipur Nagar Nigam ne Hawa Mahal par naya light and sound show shuru kiya hai. Roz shaam 7 baje hoga, bade sankhya me paryatak aa rahe hain.",
-    category: "rajasthan",
+    summary: "Jaipur Nagar Nigam ने Hawa Mahal पर नया लाइट एंड साउंड शो शुरू किया है। रोज शाम 7 बजे होगा।",
     label: "राजस्थान",
     image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800",
     date: "13 May 2026"
   },
   {
-    id: 1001,
+    id: 1003,
     title: "जयपुर मेट्रो फेज-2 को मिली मंजूरी, 2027 तक टोंक रोड तक दौड़ेगी मेट्रो",
-    summary: "राजस्थान सरकार ने जयपुर मेट्रो के दूसरे फेज को हरी झंडी दे दी है। एयरपोर्ट से टोंक रोड तक सफर आसान होगा।",
-    category: "rajasthan",
+    summary: "राजस्थान सरकार ने जयपुर मेट्रो के दूसरे फेज को हरी झंडी दे दी है।",
     label: "राजस्थान",
     image: "https://images.unsplash.com/photo-1514222134-b57cbb394c54?w=800",
     date: "13 May 2026"
@@ -74,65 +61,32 @@ const MY_NEWS = [
   {
     id: 1002,
     title: "RBSE 10वीं 12वीं रिजल्ट डेट घोषित, 15 मई को आएगा परिणाम",
-    summary: "RBSE अजमेर ने कंफर्म किया - 10वीं और 12वीं का रिजल्ट 15 मई को दोपहर 12 बजे rajeduboard पर जारी होगा।",
-    category: "education",
+    summary: "RBSE अजमेर ने कंफर्म किया - रिजल्ट 15 मई को दोपहर 12 बजे जारी होगा।",
     label: "शिक्षा",
     image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800",
     date: "13 May 2026"
   },
   {
-    id: 1003,
+    id: 1001,
     title: "राजस्थान में हीटवेव अलर्ट: जैसलमेर में पारा 46 डिग्री पार",
-    summary: "मौसम विभाग ने अगले 3 दिन तक पश्चिमी राजस्थान में लू का अलर्ट जारी किया है। दिन में बाहर निकलने से बचें।",
-    category: "rajasthan",
+    summary: "मौसम विभाग ने अगले 3 दिन तक पश्चिमी राजस्थान में लू का अलर्ट जारी किया है।",
     label: "राजस्थान",
     image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800",
     date: "13 May 2026"
   }
 ];
-// =================================================================
-// YAHAN TAK NEWS - ISKE NEECHE KUCH MAT CHHEDO
-// =================================================================
 </script>
-
 <div id="hero"></div>
 <div id="grid" class="grid"></div>
 </main>
-
+<footer class="footer container"><b>KhabarSetu</b> • हर खबर, एक जगह<br>© 2026 KhabarSetu</footer>
 <script>
-const hero = document.getElementById('hero');
-const grid = document.getElementById('grid');
+const heroDiv=document.getElementById('hero');const gridDiv=document.getElementById('grid');
 function render(){
-  if(!MY_NEWS.length) return;
-  const first = MY_NEWS[0];
-  hero.innerHTML = `
-  <div class="hero">
-    <a class="hero-main" href="#">
-      <img src="${first.image}" alt="">
-      <div class="hero-overlay">
-        <span class="badge">${first.label} • BREAKING</span>
-        <h1 class="hero-title">${first.title}</h1>
-        <div class="hero-meta">${first.date} • KhabarSetu</div>
-      </div>
-    </a>
-    <div class="side-list">
-      ${MY_NEWS.slice(1,4).map(n=>`
-        <a class="side-card" href="#">
-          <img src="${n.image}" alt="">
-          <div><span style="font-size:11px;color:#dc2626;font-weight:700">${n.label}</span><h4>${n.title}</h4><div class="card-meta">${n.date}</div></div>
-        </a>`).join('')}
-    </div>
-  </div>`;
-  grid.innerHTML = MY_NEWS.map(n=>`
-    <a class="card" href="#">
-      <img src="${n.image}" alt="">
-      <div class="card-body">
-        <span style="font-size:11px;color:#dc2626;font-weight:700">${n.label}</span>
-        <h3>${n.title}</h3>
-        <div class="card-meta">${n.date} • ${n.summary.substring(0,70)}...</div>
-      </div>
-    </a>
-  `).join('');
+  if(!NEWS.length) return;
+  const first=NEWS[0];
+  heroDiv.innerHTML=`<div class="hero"><a class="hero-main" href="#"><img src="${first.image}" alt=""><div class="hero-overlay"><span class="badge">${first.label} • BREAKING</span><h1 class="hero-title">${first.title}</h1><div class="hero-meta">${first.date} • KhabarSetu • ${first.summary}</div></div></a><div class="side">${NEWS.slice(1,4).map(n=>`<a class="side-card" href="#"><img src="${n.image}" alt=""><div><div style="font-size:11px;color:#dc2626;font-weight:700">${n.label}</div><h4>${n.title}</h4><div class="meta">${n.date}</div></div></a>`).join('')}</div></div>`;
+  gridDiv.innerHTML=NEWS.map(n=>`<a class="card" href="#"><img src="${n.image}" alt=""><div class="card-body"><div style="font-size:11px;color:#dc2626;font-weight:700">${n.label}</div><h3>${n.title}</h3><div class="meta">${n.date} • ${n.summary.substring(0,75)}...</div></div></a>`).join('');
 }
 render();
 </script>
