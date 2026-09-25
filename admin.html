@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - KhabarSetu</title>
+<style>
+:root{--bg:#f8fafc;--card:#fff;--text:#0f172a;--soft:#64748b;--border:#e2e8f0;--primary:#dc2626;--radius:16px}
+*{margin:0;padding:0;box-sizing:border-box} body{font-family:Inter,system-ui;background:var(--bg);color:var(--text)}
+.container{max-width:760px;margin:0 auto;padding:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+h1{font-size:22px;font-weight:800} label{font-size:13px;font-weight:700;color:var(--soft);margin-top:12px;display:block}
+input,textarea,select{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;font-size:14px;margin-top:8px}
+textarea{min-height:80px} .btn{padding:12px 18px;border-radius:12px;border:none;font-weight:800;font-size:14px;cursor:pointer;width:100%}
+.btn-primary{background:var(--text);color:#fff} .btn-red{background:var(--primary);color:#fff;margin-top:10px}
+.hidden{display:none} .login-box{max-width:400px;margin:80px auto;text-align:center}
+.news-item{display:flex;gap:12px;padding:10px;border:1px solid var(--border);border-radius:12px;margin-bottom:8px;background:#fff}
+.news-item img{width:60px;height:50px;border-radius:8px;object-fit:cover}
+</style>
+</head>
+<body>
+
+<div id="login" class="container login-box">
+<div class="card">
+<h1>KhabarSetu Admin</h1>
+<p style="font-size:13px;color:var(--soft);margin-top:6px">Sirf tumhare liye secret link</p>
+<input type="password" id="pass" placeholder="Password dalo">
+<button class="btn btn-primary" style="margin-top:12px" onclick="doLogin()">Login</button>
+<p style="font-size:11px;color:#94a3b8;margin-top:10px">Password: <b>khabarsetu123</b></p>
+<p id="err" style="color:red;font-size:12px;margin-top:8px;display:none">Galat password!</p>
+</div>
+</div>
+
+<div id="panel" class="container hidden">
+<div class="card" style="background:#0f172a;color:#fff">
+<h1 style="color:#fff">Post Editor - Ready!</h1>
+<p style="color:#94a3b8;font-size:13px;margin-top:4px">Nayi khabar jodo aur Download dabao</p>
+</div>
+
+<div class="card">
+<label>Headline / Title</label>
+<input id="title" placeholder="Jaipur me naya...">
+<label>Summary (2 line)</label>
+<textarea id="summary" placeholder="Short summary..."></textarea>
+<label>Category</label>
+<select id="label"><option>राजस्थान</option><option>India</option><option>शिक्षा</option><option>Jobs</option><option>Jamwa Ramgarh</option></select>
+<label>Image Link</label>
+<input id="image" placeholder="https://...">
+<button class="btn btn-primary" style="margin-top:14px" onclick="addNews()">+ Add to List</button>
+</div>
+
+<div class="card">
+<h2 style="font-size:16px">Tumhari Khabrein (<span id="count">0</span>)</h2>
+<div id="list" style="margin-top:10px"></div>
+</div>
+
+<div class="card" style="border:2px dashed #dc2626">
+<h2 style="font-size:16px">Live Kaise Karein?</h2>
+<p style="font-size:12px;margin-top:6px">1. Download dabao 2. GitHub par index.html upload karo</p>
+<button class="btn btn-red" onclick="downloadIndex()">⬇️ Download New index.html</button>
+</div>
+</div>
+
+<script>
+const DEFAULT_NEWS = [
+  {title:"जयपुर में Hawa Mahal पर नया लाइट शो शुरू",summary:"Jaipur Nagar Nigam ne naya light show shuru kiya.",label:"राजस्थान",image:"https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800",date:"13 May 2026"},
+  {title:"RBSE 10वीं 12वीं रिजल्ट 15 मई को",summary:"RBSE Ajmer ne date confirm ki.",label:"शिक्षा",image:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800",date:"13 May 2026"}
+];
+let NEWS = JSON.parse(localStorage.getItem('khabarsetu_news_v2') || 'null') || DEFAULT_NEWS;
+
+function doLogin(){
+  var p = document.getElementById('pass').value.trim();
+  if(p === 'khabarsetu123'){
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('panel').classList.remove('hidden');
+    render();
+  } else {
+    document.getElementById('err').style.display='block';
+  }
+}
+function save(){ localStorage.setItem('khabarsetu_news_v2', JSON.stringify(NEWS)); }
+function render(){
+  document.getElementById('count').innerText = NEWS.length;
+  var html = '';
+  for(var i=0;i<NEWS.length;i++){
+    var n = NEWS[i];
+    html += '<div class="news-item"><img src="'+n.image+'"><div style="flex:1"><div style="font-size:11px;color:#dc2626;font-weight:700">'+n.label+'</div><div style="font-size:13px;font-weight:700">'+n.title+'</div></div><button onclick="delNews('+i+')" style="padding:4px 8px">X</button></div>';
+  }
+  document.getElementById('list').innerHTML = html;
+}
+function addNews(){
+  var t=document.getElementById('title').value.trim();
+  var s=document.getElementById('summary').value.trim();
+  var l=document.getElementById('label').value;
+  var im=document.getElementById('image').value.trim() || 'https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800';
+  if(!t||!s){ alert('Title aur Summary likho!'); return; }
+  NEWS.unshift({title:t, summary:s, label:l, image:im, date:'13 May 2026'});
+  save(); render();
+  document.getElementById('title').value=''; document.getElementById('summary').value=''; document.getElementById('image').value='';
+  alert('Add ho gayi!');
+}
+function delNews(i){ NEWS.splice(i,1); save(); render(); }
+
+function generateFullHTML(){
+  var newsJson = JSON.stringify(NEWS);
+  var page = '<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>KhabarSetu - हर खबर, एक जगह</title><style>:root{--bg:#f8fafc;--card:#fff;--text:#0f172a;--soft:#64748b;--border:#e2e8f0;--primary:#dc2626;--radius:16px;--shadow:0 4px 20px rgba(15,23,42,.06)}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,system-ui;background:var(--bg);color:var(--text)}.container{max-width:1320px;margin:0 auto;padding:0 14px}.header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:50}.header-top{height:60px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:800}.logo{width:36px;height:36px;border-radius:9px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center}.hero{margin:18px 0;display:grid;gap:16px}@media(min-width:900px){.hero{grid-template-columns:1.8fr .9fr}}.hero-main{position:relative;border-radius:var(--radius);overflow:hidden;min-height:380px;background:#000;display:block}.hero-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:18px}.badge{background:var(--primary);color:#fff;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;width:fit-content;margin-bottom:8px}.hero-title{color:#fff;font-size:22px;font-weight:800}.side{display:flex;flex-direction:column;gap:10px}.side-card{display:flex;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px;text-decoration:none;color:var(--text)}.side-card img{width:90px;height:70px;border-radius:10px;object-fit:cover}.grid{margin-top:10px;display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}@media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr)}}@media(min-width:1100px){.grid{grid-template-columns:repeat(4,1fr)}}.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;text-decoration:none;color:var(--text)}.card img{width:100%;height:150px;object-fit:cover}.card-body{padding:10px}.card-body h3{font-size:14px;line-height:1.3}.meta{font-size:11px;color:var(--soft);margin-top:4px}.footer{margin-top:30px;padding:20px 0;border-top:1px solid var(--border);text-align:center;color:var(--soft);font-size:12px}</style></head><body><header class="header"><div class="container header-top"><a class="brand" href="#"><div class="logo">K</div>KhabarSetu</a><div style="font-size:12px;color:var(--soft)">Jamwa Ramgarh</div></div></header><div class="container"><div id="hero"></div><div id="grid" class="grid"></div></div><footer class="footer"><div class="container"><a href="data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImhpIj4KPGhlYWQ+PG1ldGEgY2hhcnNldD0iVVRGLTgiPjxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wIj48dGl0bGU+QWJvdXQgVXMgLSBLaGFiYXJTZXR1PC90aXRsZT4KPGxpbmsgaHJlZj0iaHR0cHM6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9jc3MyP2ZhbWlseT1JbnRlcjp3Z2h0QDcwMCZmYW1pbHk9Tm90bytTYW5zK0RldmFuYWdhcmk6d2dodEA2MDA7NzAwJmRpc3BsYXk9c3dhcCIgcmVsPSJzdHlsZXNoZWV0Ij4KPHN0eWxlPjpyb290ey0tYmc6I2Y4ZmFmYzstLWNhcmQ6I2ZmZjstLXRleHQ6IzBmMTcyYTstLXNvZnQ6IzY0NzQ4YjstLWJvcmRlcjojZTJlOGYwOy0tcHJpbWFyeTojZGMyNjI2Oy0tcmFkaXVzOjE2cHg7LS1zaGFkb3c6MCA0cHggMjBweCByZ2JhKDE1LDIzLDQyLC4wNil9KnttYXJnaW46MDtwYWRkaW5nOjA7Ym94LXNpemluZzpib3JkZXItYm94fWJvZHl7Zm9udC1mYW1pbHk6J0ludGVyJywnTm90byBTYW5zIERldmFuYWdhcmknLHN5c3RlbS11aTtiYWNrZ3JvdW5kOnZhcigtLWJnKTtjb2xvcjp2YXIoLS10ZXh0KX0uY29udGFpbmVye21heC13aWR0aDo5MDBweDttYXJnaW46MCBhdXRvO3BhZGRpbmc6MCAxNnB4fS5oZWFkZXJ7cG9zaXRpb246c3RpY2t5O3RvcDowO2JhY2tncm91bmQ6I2ZmZmZmZmVlO2JhY2tkcm9wLWZpbHRlcjpibHVyKDEwcHgpO2JvcmRlci1ib3R0b206MXB4IHNvbGlkIHZhcigtLWJvcmRlcik7aGVpZ2h0OjYwcHg7ZGlzcGxheTpmbGV4O2FsaWduLWl0ZW1zOmNlbnRlcn0uYnJhbmR7ZGlzcGxheTpmbGV4O2dhcDoxMHB4O2FsaWduLWl0ZW1zOmNlbnRlcjtmb250LXdlaWdodDo4MDA7Zm9udC1zaXplOjE4cHh9LmxvZ297d2lkdGg6MzZweDtoZWlnaHQ6MzZweDtib3JkZXItcmFkaXVzOjEwcHg7YmFja2dyb3VuZDp2YXIoLS1wcmltYXJ5KTtjb2xvcjojZmZmO2Rpc3BsYXk6ZmxleDthbGlnbi1pdGVtczpjZW50ZXI7anVzdGlmeS1jb250ZW50OmNlbnRlcn0uYm94e2JhY2tncm91bmQ6dmFyKC0tY2FyZCk7Ym9yZGVyOjFweCBzb2xpZCB2YXIoLS1ib3JkZXIpO2JvcmRlci1yYWRpdXM6dmFyKC0tcmFkaXVzKTtib3gtc2hhZG93OnZhcigtLXNoYWRvdyk7cGFkZGluZzoyNHB4O21hcmdpbjoyMHB4IDB9aDF7Zm9udC1zaXplOjI2cHg7bWFyZ2luLWJvdHRvbToxMnB4fXB7Y29sb3I6dmFyKC0tc29mdCk7bGluZS1oZWlnaHQ6MS43O21hcmdpbi1ib3R0b206MTJweDtmb250LXNpemU6MTVweH1he2NvbG9yOnZhcigtLXByaW1hcnkpO3RleHQtZGVjb3JhdGlvbjpub25lO2ZvbnQtd2VpZ2h0OjYwMH08L3N0eWxlPgo8L2hlYWQ+Cjxib2R5Pgo8aGVhZGVyIGNsYXNzPSJoZWFkZXIiPjxkaXYgY2xhc3M9ImNvbnRhaW5lciI+PGRpdiBjbGFzcz0iYnJhbmQiPjxkaXYgY2xhc3M9ImxvZ28iPks8L2Rpdj5LaGFiYXJTZXR1PC9kaXY+PC9kaXY+PC9oZWFkZXI+CjxtYWluIGNsYXNzPSJjb250YWluZXIiPgo8ZGl2IGNsYXNzPSJib3giPgo8aDE+QWJvdXQgVXMgLSBLaGFiYXJTZXR1PC9oMT4KPHA+PGI+S2hhYmFyU2V0dTwvYj4gZWsgaHlwZXJsb2NhbCBuZXdzIHdlYnNpdGUgaGFpIGpvIEphbXdhIFJhbWdhcmgsIEphaXB1ciBhdXIgUmFqYXN0aGFuIGtpIHRhemEga2hhYnJvbiBrbyBlayBqYWdhaCBwYXIgbGFhdGkgaGFpLjwvcD4KPHA+SGFtYXJhIG1ha3NhZCBoYWkgZ2Fvbiwga2FzYmEgYXVyIHNoYWhhciBraSBoYXIgY2hob3RpLWJhZGkga2hhYmFyIGtvIGFhc2FhbiBiaGFzaGEgKEhpbmRpKSBtZSBhYXAgdGFrIHBhaHVuY2hhbmEuIEh1bSBrb3NoaXNoIGthcnRlIGhhaW4ga2kga2hhYmFyIGJpbmEgbWlsYXdhdCBrZSwgc2VlZGhpIGF1ciBzYWNoY2hpIGhvLjwvcD4KPHA+PGI+SGFtIGt5YSBjb3ZlciBrYXJ0ZSBoYWluPzwvYj48YnI+Ci0gUmFqYXN0aGFuIC8gSmFpcHVyIGtpIGJyZWFraW5nIG5ld3M8YnI+Ci0gRWR1Y2F0aW9uIChSQlNFLCBDb2xsZWdlLCBKb2JzKTxicj4KLSBNYXVzYW0sIEtoZXRpLCBHYW9uIGtpIGtoYWJyZWluPGJyPgotIFNhcmthcmkgWW9qYW5hIGF1ciBsb2NhbCBldmVudHM8L3A+CjxwPktoYWJhclNldHUga2kgc2h1cnVhYXQgMjAyNiBtZSBKYWlwdXIgc2UgaHVpIHRoaS4gSHVtIHN0dWRlbnQgYXVyIHl1dmEgdGVhbSBoYWluIGpvIGRpZ2l0YWwgcGF0cmFrYXJpdGEga28gZ2FvbiB0YWsgbGUgamFuYSBjaGFodGUgaGFpbi48L3A+CjxwPkNvbnRhY3Q6IDxiPmtoYWJhcnNldHUxQGdtYWlsLmNvbTwvYj48L3A+CjxhIGhyZWY9ImluZGV4Lmh0bWwiPuKGkCBCYWNrIHRvIEhvbWU8L2E+CjwvZGl2Pgo8L21haW4+CjwvYm9keT4KPC9odG1sPgo=" style="margin-right:10px">About</a><a href="data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImhpIj4KPGhlYWQ+PG1ldGEgY2hhcnNldD0iVVRGLTgiPjxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wIj48dGl0bGU+Q29udGFjdCBVcyAtIEtoYWJhclNldHU8L3RpdGxlPgo8bGluayBocmVmPSJodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2NzczI/ZmFtaWx5PUludGVyOndnaHRANzAwJmZhbWlseT1Ob3RvK1NhbnMrRGV2YW5hZ2FyaTp3Z2h0QDYwMDs3MDAmZGlzcGxheT1zd2FwIiByZWw9InN0eWxlc2hlZXQiPgo8c3R5bGU+OnJvb3R7LS1iZzojZjhmYWZjOy0tY2FyZDojZmZmOy0tdGV4dDojMGYxNzJhOy0tc29mdDojNjQ3NDhiOy0tYm9yZGVyOiNlMmU4ZjA7LS1wcmltYXJ5OiNkYzI2MjY7LS1yYWRpdXM6MTZweDstLXNoYWRvdzowIDRweCAyMHB4IHJnYmEoMTUsMjMsNDIsLjA2KX0qe21hcmdpbjowO3BhZGRpbmc6MDtib3gtc2l6aW5nOmJvcmRlci1ib3h9Ym9keXtmb250LWZhbWlseTonSW50ZXInLCdOb3RvIFNhbnMgRGV2YW5hZ2FyaScsc3lzdGVtLXVpO2JhY2tncm91bmQ6dmFyKC0tYmcpO2NvbG9yOnZhcigtLXRleHQpfS5jb250YWluZXJ7bWF4LXdpZHRoOjkwMHB4O21hcmdpbjowIGF1dG87cGFkZGluZzowIDE2cHh9LmhlYWRlcntwb3NpdGlvbjpzdGlja3k7dG9wOjA7YmFja2dyb3VuZDojZmZmZmZmZWU7YmFja2Ryb3AtZmlsdGVyOmJsdXIoMTBweCk7Ym9yZGVyLWJvdHRvbToxcHggc29saWQgdmFyKC0tYm9yZGVyKTtoZWlnaHQ6NjBweDtkaXNwbGF5OmZsZXg7YWxpZ24taXRlbXM6Y2VudGVyfS5icmFuZHtkaXNwbGF5OmZsZXg7Z2FwOjEwcHg7YWxpZ24taXRlbXM6Y2VudGVyO2ZvbnQtd2VpZ2h0OjgwMDtmb250LXNpemU6MThweH0ubG9nb3t3aWR0aDozNnB4O2hlaWdodDozNnB4O2JvcmRlci1yYWRpdXM6MTBweDtiYWNrZ3JvdW5kOnZhcigtLXByaW1hcnkpO2NvbG9yOiNmZmY7ZGlzcGxheTpmbGV4O2FsaWduLWl0ZW1zOmNlbnRlcjtqdXN0aWZ5LWNvbnRlbnQ6Y2VudGVyfS5ib3h7YmFja2dyb3VuZDp2YXIoLS1jYXJkKTtib3JkZXI6MXB4IHNvbGlkIHZhcigtLWJvcmRlcik7Ym9yZGVyLXJhZGl1czp2YXIoLS1yYWRpdXMpO2JveC1zaGFkb3c6dmFyKC0tc2hhZG93KTtwYWRkaW5nOjI0cHg7bWFyZ2luOjIwcHggMH1oMXtmb250LXNpemU6MjZweDttYXJnaW4tYm90dG9tOjEycHh9cHtjb2xvcjp2YXIoLS1zb2Z0KTtsaW5lLWhlaWdodDoxLjc7bWFyZ2luLWJvdHRvbToxMnB4O2ZvbnQtc2l6ZToxNXB4fWF7Y29sb3I6dmFyKC0tcHJpbWFyeSk7dGV4dC1kZWNvcmF0aW9uOm5vbmU7Zm9udC13ZWlnaHQ6NjAwfS5maWVsZHttYXJnaW4tYm90dG9tOjEycHh9LmZpZWxkIGxhYmVse2ZvbnQtc2l6ZToxM3B4O2ZvbnQtd2VpZ2h0OjcwMDtkaXNwbGF5OmJsb2NrO21hcmdpbi1ib3R0b206NnB4fS5maWVsZCBpbnB1dCwuZmllbGQgdGV4dGFyZWF7d2lkdGg6MTAwJTtwYWRkaW5nOjEycHg7Ym9yZGVyOjFweCBzb2xpZCB2YXIoLS1ib3JkZXIpO2JvcmRlci1yYWRpdXM6MTBweDtmb250LXNpemU6MTRweH0uYnRue2JhY2tncm91bmQ6dmFyKC0tdGV4dCk7Y29sb3I6I2ZmZjtwYWRkaW5nOjEycHggMjBweDtib3JkZXItcmFkaXVzOjEwcHg7Ym9yZGVyOjA7Zm9udC13ZWlnaHQ6NzAwfTwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+CjxoZWFkZXIgY2xhc3M9ImhlYWRlciI+PGRpdiBjbGFzcz0iY29udGFpbmVyIj48ZGl2IGNsYXNzPSJicmFuZCI+PGRpdiBjbGFzcz0ibG9nbyI+SzwvZGl2PktoYWJhclNldHU8L2Rpdj48L2Rpdj48L2hlYWRlcj4KPG1haW4gY2xhc3M9ImNvbnRhaW5lciI+CjxkaXYgY2xhc3M9ImJveCI+CjxoMT5Db250YWN0IFVzPC9oMT4KPHA+QWdhciBhYXBrZSBwYWFzIGtvaSBraGFiYXIgaGFpLCBzdWpoYXYgaGFpIHlhIGdhbGF0IGtoYWJhciBrbyBsZWthciBzaGlrYXlhdCBoYWkgdG8gaHVtc2Ugc2FtcGFyayBrYXJlaW4uPC9wPgo8cD48Yj5Mb2NhdGlvbjo8L2I+IEphbXdhIFJhbWdhcmgsIEphaXB1ciwgUmFqYXN0aGFuIC0gMzAzMDAxPC9wPgo8cD48Yj5FbWFpbDo8L2I+IGtoYWJhcnNldHUxQGdtYWlsLmNvbTxicj48Yj5XaGF0c0FwcDo8L2I+ICs5MS1YWFhYWFhYWFhYICh5YWhhbiBhcG5hIG51bWJlciBkYWFsIGRlbmEpPC9wPgo8ZGl2IHN0eWxlPSJtYXJnaW4tdG9wOjIwcHgiPgo8ZGl2IGNsYXNzPSJmaWVsZCI+PGxhYmVsPkFwbmEgTmFhbTwvbGFiZWw+PGlucHV0IHBsYWNlaG9sZGVyPSJOYWFtIGxpa2hlaW4iPjwvZGl2Pgo8ZGl2IGNsYXNzPSJmaWVsZCI+PGxhYmVsPkVtYWlsIC8gTW9iaWxlPC9sYWJlbD48aW5wdXQgcGxhY2Vob2xkZXI9IkVtYWlsIHlhIE1vYmlsZSI+PC9kaXY+CjxkaXYgY2xhc3M9ImZpZWxkIj48bGFiZWw+TWVzc2FnZTwvbGFiZWw+PHRleHRhcmVhIHJvd3M9IjQiIHBsYWNlaG9sZGVyPSJBcG5hIHNhbmRlc2ggbGlraGVpbiI+PC90ZXh0YXJlYT48L2Rpdj4KPGJ1dHRvbiBjbGFzcz0iYnRuIj5NZXNzYWdlIEJoZWpvPC9idXR0b24+CjxwIHN0eWxlPSJtYXJnaW4tdG9wOjE0cHg7Zm9udC1zaXplOjEycHgiPk5vdGU6IFllIGZvcm0gYWJoaSBkZW1vIGhhaS4gRW1haWwgcGFyIGRpcmVjdCBzYW1wYXJrIGthcmVpbi4gQWRTZW5zZSBhcHByb3ZhbCBrZSBiYWFkIHdvcmtpbmcgY29udGFjdCBmb3JtIGxhZ2EgZGVuZ2UuPC9wPgo8L2Rpdj4KPGJyPjxhIGhyZWY9ImluZGV4Lmh0bWwiPuKGkCBCYWNrIHRvIEhvbWU8L2E+CjwvZGl2Pgo8L21haW4+CjwvYm9keT4KPC9odG1sPgo=" style="margin-right:10px">Contact</a><a href="data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImhpIj4KPGhlYWQ+PG1ldGEgY2hhcnNldD0iVVRGLTgiPjxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wIj48dGl0bGU+UHJpdmFjeSBQb2xpY3kgLSBLaGFiYXJTZXR1PC90aXRsZT4KPGxpbmsgaHJlZj0iaHR0cHM6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9jc3MyP2ZhbWlseT1JbnRlcjp3Z2h0QDcwMCZmYW1pbHk9Tm90bytTYW5zK0RldmFuYWdhcmk6d2dodEA2MDA7NzAwJmRpc3BsYXk9c3dhcCIgcmVsPSJzdHlsZXNoZWV0Ij4KPHN0eWxlPjpyb290ey0tYmc6I2Y4ZmFmYzstLWNhcmQ6I2ZmZjstLXRleHQ6IzBmMTcyYTstLXNvZnQ6IzY0NzQ4YjstLWJvcmRlcjojZTJlOGYwOy0tcHJpbWFyeTojZGMyNjI2Oy0tcmFkaXVzOjE2cHg7LS1zaGFkb3c6MCA0cHggMjBweCByZ2JhKDE1LDIzLDQyLC4wNil9KnttYXJnaW46MDtwYWRkaW5nOjA7Ym94LXNpemluZzpib3JkZXItYm94fWJvZHl7Zm9udC1mYW1pbHk6J0ludGVyJywnTm90byBTYW5zIERldmFuYWdhcmknLHN5c3RlbS11aTtiYWNrZ3JvdW5kOnZhcigtLWJnKTtjb2xvcjp2YXIoLS10ZXh0KX0uY29udGFpbmVye21heC13aWR0aDo5MDBweDttYXJnaW46MCBhdXRvO3BhZGRpbmc6MCAxNnB4fS5oZWFkZXJ7cG9zaXRpb246c3RpY2t5O3RvcDowO2JhY2tncm91bmQ6I2ZmZmZmZmVlO2JhY2tkcm9wLWZpbHRlcjpibHVyKDEwcHgpO2JvcmRlci1ib3R0b206MXB4IHNvbGlkIHZhcigtLWJvcmRlcik7aGVpZ2h0OjYwcHg7ZGlzcGxheTpmbGV4O2FsaWduLWl0ZW1zOmNlbnRlcn0uYnJhbmR7ZGlzcGxheTpmbGV4O2dhcDoxMHB4O2FsaWduLWl0ZW1zOmNlbnRlcjtmb250LXdlaWdodDo4MDA7Zm9udC1zaXplOjE4cHh9LmxvZ297d2lkdGg6MzZweDtoZWlnaHQ6MzZweDtib3JkZXItcmFkaXVzOjEwcHg7YmFja2dyb3VuZDp2YXIoLS1wcmltYXJ5KTtjb2xvcjojZmZmO2Rpc3BsYXk6ZmxleDthbGlnbi1pdGVtczpjZW50ZXI7anVzdGlmeS1jb250ZW50OmNlbnRlcn0uYm94e2JhY2tncm91bmQ6dmFyKC0tY2FyZCk7Ym9yZGVyOjFweCBzb2xpZCB2YXIoLS1ib3JkZXIpO2JvcmRlci1yYWRpdXM6dmFyKC0tcmFkaXVzKTtib3gtc2hhZG93OnZhcigtLXNoYWRvdyk7cGFkZGluZzoyNHB4O21hcmdpbjoyMHB4IDB9aDF7Zm9udC1zaXplOjI2cHg7bWFyZ2luLWJvdHRvbToxMnB4fWgze21hcmdpbjoxOHB4IDAgOHB4fXAsbGl7Y29sb3I6dmFyKC0tc29mdCk7bGluZS1oZWlnaHQ6MS43O21hcmdpbi1ib3R0b206MTBweDtmb250LXNpemU6MTRweH11bHtwYWRkaW5nLWxlZnQ6MThweH1he2NvbG9yOnZhcigtLXByaW1hcnkpO3RleHQtZGVjb3JhdGlvbjpub25lO2ZvbnQtd2VpZ2h0OjYwMH08L3N0eWxlPgo8L2hlYWQ+Cjxib2R5Pgo8aGVhZGVyIGNsYXNzPSJoZWFkZXIiPjxkaXYgY2xhc3M9ImNvbnRhaW5lciI+PGRpdiBjbGFzcz0iYnJhbmQiPjxkaXYgY2xhc3M9ImxvZ28iPks8L2Rpdj5LaGFiYXJTZXR1PC9kaXY+PC9kaXY+PC9oZWFkZXI+CjxtYWluIGNsYXNzPSJjb250YWluZXIiPgo8ZGl2IGNsYXNzPSJib3giPgo8aDE+UHJpdmFjeSBQb2xpY3k8L2gxPgo8cD48Yj5MYXN0IFVwZGF0ZWQ6PC9iPiAxMyBNYXkgMjAyNjwvcD4KPHA+S2hhYmFyU2V0dSAoaHR0cHM6Ly8xbmVldDIwMjcuZ2l0aHViLmlvL0toYWJhclNldHUxLykgcGFyIGFhcGtpIHByaXZhY3kgaGFtYXJlIGxpeWUgbWFoYXR2YXB1cm4gaGFpLjwvcD4KPGgzPjEuIEh1bSBrYXVuc2EgZGF0YSBsZXRlIGhhaW4/PC9oMz4KPHVsPgo8bGk+R29vZ2xlIEFuYWx5dGljcyBzZSBodW0gZGVraHRlIGhhaW4ga2F1bnNpIGtoYWJhciBqeWFkYSBwYWRoaSBnYXlpLjwvbGk+CjxsaT5Hb29nbGUgQWRTZW5zZSBrZSBhZHMgZGlraGFuZSBrZSBsaXllIGNvb2tpZXMga2EgdXB5b2cgaG90YSBoYWkuPC9saT4KPGxpPkh1bSBhYXBrYSBwZXJzb25hbCBkYXRhIGphaXNlIHBob25lIG51bWJlciBiaW5hIHBlcm1pc3Npb24ga2UgY29sbGVjdCBuYWhpIGthcnRlLjwvbGk+CjwvdWw+CjxoMz4yLiBDb29raWVzPC9oMz4KPHA+QWRzIGF1ciB0cmFmZmljIHNhbWFqaG5lIGtlIGxpeWUgYnJvd3NlciBtZSBjb29raWVzIHNhdmUgaG8gc2FrdGkgaGFpbi4gQWFwIGNoYWhlaW4gdG8gYnJvd3NlciBzZXR0aW5ncyBzZSBjb29raWVzIGtvIGJhbmQga2FyIHNha3RlIGhhaW4uPC9wPgo8aDM+My4gVGhpcmQgUGFydHkgQWRzPC9oMz4KPHA+R29vZ2xlIEFkU2Vuc2UgdGhpcmQtcGFydHkgdmVuZG9yIGhhaSBqbyBhYXBraSBwaWNoaGxpIHZpc2l0cyBrZSBoaXNhYiBzZSBhZHMgZGlraGF0YSBoYWkuIEFhcCBodHRwczovL2Fkc3NldHRpbmdzLmdvb2dsZS5jb20gcGFyIGpha2FyIHBlcnNvbmFsaXplZCBhZHMgYmFuZCBrYXIgc2FrdGUgaGFpbi48L3A+CjxoMz40LiBDb250YWN0PC9oMz4KPHA+QWdhciBhYXBrbyBwcml2YWN5IGtvIGxla2FyIGtvaSBzYXdhbCBoYWkgdG8gZW1haWwga2FyZWluOiA8Yj5raGFiYXJzZXR1MUBnbWFpbC5jb208L2I+PC9wPgo8aDM+NS4gQ29uc2VudDwvaDM+CjxwPkhhbWFyaSB3ZWJzaXRlIGthIHVweW9nIGthcmtlIGFhcCBpcyBQcml2YWN5IFBvbGljeSBzZSBzYWhtYXQgaG90ZSBoYWluLjwvcD4KPGJyPjxhIGhyZWY9ImluZGV4Lmh0bWwiPuKGkCBCYWNrIHRvIEhvbWU8L2E+CjwvZGl2Pgo8L21haW4+CjwvYm9keT4KPC9odG1sPgo=">Privacy</a><br><br>KhabarSetu - Jamwa Ramgarh<br>© 2026</div></footer><script>var NEWS = '+newsJson+'; var heroDiv=document.getElementById("hero"); var gridDiv=document.getElementById("grid"); var first=NEWS[0]; var sideHtml=""; for(var i=1;i<Math.min(4,NEWS.length);i++){ var n=NEWS[i]; sideHtml += \'<a class="side-card" href="#"><img src="\'+n.image+\'"><div><div style="font-size:11px;color:#dc2626;font-weight:700">\'+n.label+\'</div><h4 style="font-size:13px">\'+n.title+\'</h4></div></a>\'; } heroDiv.innerHTML = \'<div class="hero"><a class="hero-main" href="#"><img src="\'+first.image+\'"><div class="hero-overlay"><span class="badge">\'+first.label+\' • BREAKING</span><h1 class="hero-title">\'+first.title+\'</h1></div></a><div class="side">\'+sideHtml+\'</div></div>\'; var gridHtml=""; for(var i=0;i<NEWS.length;i++){ var n=NEWS[i]; gridHtml += \'<a class="card" href="#"><img src="\'+n.image+\'"><div class="card-body"><div style="font-size:11px;color:#dc2626;font-weight:700">\'+n.label+\'</div><h3>\'+n.title+\'</h3><div class="meta">\'+n.summary.substring(0,60)+\'...</div></div></a>\'; } gridDiv.innerHTML = gridHtml; <\/script></body></html>';
+  return page;
+}
+
+function downloadIndex(){
+  var html = generateFullHTML();
+  var blob = new Blob([html], {type:'text/html'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'index.html';
+  a.click();
+}
+</script>
+</body>
+</html>
