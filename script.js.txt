@@ -1,0 +1,568 @@
+
+const STR = {
+  hi: {
+    searchPlaceholder:"KhabarSetu पर खोजें",
+    noResults:"कोई परिणाम नहीं मिला",
+    demo:"डेमो कंटेंट",
+    liveUnavailable:"Live news data is currently unavailable.",
+    breaking:"ब्रेकिंग",
+    live:"लाइव अपडेट",
+    trending:"🔥 ट्रेंडिंग",
+    popular:"KhabarSetu पर लोकप्रिय",
+    mostRead:"सबसे ज्यादा पढ़ी गई",
+    related:"संबंधित खबरें",
+    back:"वापस",
+    share:"शेयर करें",
+    source:"स्रोत",
+    author:"लेखक",
+    published:"प्रकाशित",
+    updated:"अपडेट",
+    readMore:"पूरा पढ़ें",
+    categories:"श्रेणियाँ",
+    home:"होम",
+    india:"भारत",
+    world:"दुनिया",
+    rajasthan:"राजस्थान",
+    education:"शिक्षा",
+    neet:"NEET",
+    results:"रिजल्ट",
+    jobs:"सरकारी नौकरी",
+    technology:"टेक्नोलॉजी",
+    business:"बिज़नेस",
+    sports:"खेल",
+    entertainment:"मनोरंजन",
+    lifestyle:"लाइफस्टाइल",
+    health:"स्वास्थ्य",
+    factCheck:"फैक्ट चेक",
+    emptyCat:"अभी इस category में कोई खबर उपलब्ध नहीं है।",
+    search:"खोजें",
+    light:"लाइट",
+    dark:"डार्क"
+  },
+  en: {
+    searchPlaceholder:"Search KhabarSetu",
+    noResults:"No results found",
+    demo:"Demo Content",
+    liveUnavailable:"Live news data is currently unavailable.",
+    breaking:"BREAKING",
+    live:"Live Updates",
+    trending:"Trending Now",
+    popular:"Popular on KhabarSetu",
+    mostRead:"Most Read",
+    related:"Related News",
+    back:"Back",
+    share:"Share",
+    source:"Source",
+    author:"Author",
+    published:"Published",
+    updated:"Updated",
+    readMore:"Read More",
+    categories:"Categories",
+    home:"Home",
+    india:"India",
+    world:"World",
+    rajasthan:"Rajasthan",
+    education:"Education",
+    neet:"NEET",
+    results:"Results",
+    jobs:"Government Jobs",
+    technology:"Technology",
+    business:"Business",
+    sports:"Sports",
+    entertainment:"Entertainment",
+    lifestyle:"Lifestyle",
+    health:"Health",
+    factCheck:"Fact Check",
+    emptyCat:"Currently no stories are available in this category.",
+    search:"Search",
+    light:"Light",
+    dark:"Dark"
+  }
+};
+
+const CATEGORIES = [
+  {key:"home", hi:"होम", en:"Home"},
+  {key:"breaking", hi:"ब्रेकिंग न्यूज़", en:"Breaking News"},
+  {key:"india", hi:"भारत", en:"India"},
+  {key:"world", hi:"दुनिया", en:"World"},
+  {key:"rajasthan", hi:"राजस्थान", en:"Rajasthan"},
+  {key:"education", hi:"शिक्षा", en:"Education"},
+  {key:"neet", hi:"NEET", en:"NEET"},
+  {key:"jee", hi:"JEE", en:"JEE"},
+  {key:"results", hi:"रिजल्ट", en:"Exam Results"},
+  {key:"jobs", hi:"सरकारी नौकरी", en:"Government Jobs"},
+  {key:"admit", hi:"एडमिट कार्ड", en:"Admit Card"},
+  {key:"technology", hi:"टेक्नोलॉजी", en:"Technology"},
+  {key:"business", hi:"बिज़नेस", en:"Business"},
+  {key:"sports", hi:"खेल", en:"Sports"},
+  {key:"entertainment", hi:"मनोरंजन", en:"Entertainment"},
+  {key:"lifestyle", hi:"लाइफस्टाइल", en:"Lifestyle"},
+  {key:"health", hi:"स्वास्थ्य", en:"Health"},
+  {key:"science", hi:"विज्ञान", en:"Science"},
+  {key:"viral", hi:"वायरल", en:"Viral"},
+  {key:"factcheck", hi:"फैक्ट चेक", en:"Fact Check"},
+  {key:"weather", hi:"मौसम", en:"Weather"},
+  {key:"auto", hi:"ऑटो", en:"Auto"},
+];
+
+// Demo articles - clearly marked, no fake real news claims
+const ARTICLES = [
+  {
+    id:"1", category:"india", tags:["india","politics","demo"],
+    titleHi:"भारत में डिजिटल शिक्षा को बढ़ावा - डेमो रिपोर्ट", titleEn:"Digital Education Push in India - Demo Report",
+    summaryHi:"यह डेमो कंटेंट है। वास्तविक लाइव डेटा उपलब्ध नहीं है। शिक्षा मंत्रालय के डिजिटल पहल पर नमूना सारांश।",
+    summaryEn:"This is demo content. Live news data is currently unavailable. Sample summary on digital education initiative.",
+    image:"https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80", author:"KhabarSetu Desk", source:"Sample Source / Education Dept (Demo)", publishedAt:"2026-05-10 09:30", updatedAt:"2026-05-10 10:00", slug:"digital-education-push-india-demo"
+  },
+  {
+    id:"2", category:"rajasthan", tags:["rajasthan","jaipur","demo"],
+    titleHi:"जयपुर में हेरिटेज फेस्टिवल की तैयारी - डेमो", titleEn:"Heritage Festival Prep in Jaipur - Demo",
+    summaryHi:"डेमो कंटेंट: जयपुर पर्यटन से जुड़ा नमूना लेख। वास्तविक इवेंट विवरण नहीं।",
+    summaryEn:"Demo Content: Sample article on Jaipur tourism. Not a real event listing.",
+    image:"https://images.unsplash.com/photo-1477587458883-47145ed94245?w=800&q=80", author:"Rajasthan Bureau (Demo)", source:"Demo / Tourism Board Sample", publishedAt:"2026-05-09 18:10", updatedAt:"2026-05-09 18:10", slug:"jaipur-heritage-festival-demo"
+  },
+  {
+    id:"3", category:"neet", tags:["neet","education","demo"],
+    titleHi:"NEET परीक्षा पैटर्न समझें - डेमो गाइड", titleEn:"Understanding NEET Pattern - Demo Guide",
+    summaryHi:"डेमो कंटेंट: NEET पैटर्न पर सामान्य जानकारी, कोई आधिकारिक तिथि/कटऑफ नहीं।",
+    summaryEn:"Demo Content: General info on NEET pattern, no official dates/cutoffs.",
+    image:"https://images.unsplash.com/photo-1531482615713-2afd690979bc?w=800&q=80", author:"Education Desk", source:"NTA Official (Sample Reference)", publishedAt:"2026-05-08 12:00", updatedAt:"2026-05-08 12:00", slug:"neet-pattern-demo-guide"
+  },
+  {
+    id:"4", category:"technology", tags:["tech","ai","demo"],
+    titleHi:"AI टूल्स से पढ़ाई आसान - डेमो फीचर", titleEn:"Study Gets Easier with AI Tools - Demo Feature",
+    summaryHi:"डेमो: AI टूल्स पर नमूना फीचर लेख।",
+    summaryEn:"Demo: Sample feature on AI tools for students.",
+    image:"https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80", author:"Tech Desk", source:"Demo Research", publishedAt:"2026-05-07 15:20", updatedAt:"2026-05-07 15:20", slug:"ai-tools-study-demo"
+  },
+  {
+    id:"5", category:"results", tags:["results","rbse","demo"],
+    titleHi:"RBSE रिजल्ट कैसे देखें - डेमो प्रक्रिया", titleEn:"How to Check RBSE Result - Demo Process",
+    summaryHi:"डेमो कंटेंट: रिजल्ट देखने की सामान्य प्रक्रिया, वास्तविक रिजल्ट डेटा नहीं।",
+    summaryEn:"Demo Content: Generic process to check results, no real result data.",
+    image:"https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80", author:"Results Desk", source:"RBSE Sample Page", publishedAt:"2026-05-06 11:00", updatedAt:"2026-05-06 11:00", slug:"rbse-result-demo-process"
+  },
+  {
+    id:"6", category:"jobs", tags:["jobs","rpsc","demo"],
+    titleHi:"सरकारी नौकरी आवेदन में क्या ध्यान रखें - डेमो गाइड", titleEn:"Govt Job Application Tips - Demo Guide",
+    summaryHi:"डेमो: आवेदन के लिए सामान्य टिप्स, कोई वास्तविक भर्ती नहीं।",
+    summaryEn:"Demo: General tips for application, no real recruitment.",
+    image:"https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80", author:"Jobs Desk", source:"Employment News (Sample)", publishedAt:"2026-05-05 10:00", updatedAt:"2026-05-05 10:00", slug:"govt-job-tips-demo"
+  },
+  {
+    id:"7", category:"world", tags:["world","climate","demo"],
+    titleHi:"जलवायु परिवर्तन पर वैश्विक चर्चा - डेमो सार", titleEn:"Global Climate Talks - Demo Summary",
+    summaryHi:"डेमो कंटेंट: जलवायु पर नमूना सारांश।",
+    summaryEn:"Demo Content: Sample summary on climate.",
+    image:"https://images.unsplash.com/photo-1569163139394-de44cb4be880?w=800&q=80", author:"World Desk", source:"UN Reports (Sample)", publishedAt:"2026-05-04 09:00", updatedAt:"2026-05-04 09:00", slug:"climate-talks-demo"
+  },
+  {
+    id:"8", category:"sports", tags:["sports","cricket","demo"],
+    titleHi:"क्रिकेट में फिटनेस का महत्व - डेमो एनालिसिस", titleEn:"Importance of Fitness in Cricket - Demo Analysis",
+    summaryHi:"डेमो: खेल फिटनेस पर नमूना लेख।",
+    summaryEn:"Demo: Sample article on sports fitness.",
+    image:"https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800&q=80", author:"Sports Desk", source:"Demo Analysis", publishedAt:"2026-05-03 17:30", updatedAt:"2026-05-03 17:30", slug:"cricket-fitness-demo"
+  },
+  {
+    id:"9", category:"rajasthan", tags:["rajasthan","udaipur","demo"],
+    titleHi:"उदयपुर लेक टूरिज्म गाइड - डेमो", titleEn:"Udaipur Lake Tourism Guide - Demo",
+    summaryHi:"डेमो: उदयपुर पर्यटन नमूना।",
+    summaryEn:"Demo: Udaipur tourism sample.",
+    image:"https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&q=80", author:"Rajasthan Bureau", source:"Demo", publishedAt:"2026-05-02 08:00", updatedAt:"2026-05-02 08:00", slug:"udaipur-tourism-demo"
+  },
+  {
+    id:"10", category:"education", tags:["education","jee","demo"],
+    titleHi:"JEE तैयारी के लिए टाइम मैनेजमेंट - डेमो", titleEn:"Time Management for JEE Prep - Demo",
+    summaryHi:"डेमो: JEE तैयारी टिप्स नमूना।",
+    summaryEn:"Demo: JEE prep tips sample.",
+    image:"https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80", author:"Education Desk", source:"Demo", publishedAt:"2026-05-01 13:00", updatedAt:"2026-05-01 13:00", slug:"jee-time-management-demo"
+  },
+  {
+    id:"11", category:"factcheck", tags:["factcheck","demo"],
+    titleHi:"फैक्ट चेक कैसे काम करता है - डेमो व्याख्या", titleEn:"How Fact Check Works - Demo Explainer",
+    summaryHi:"डेमो: फैक्ट चेक प्रक्रिया की व्याख्या।",
+    summaryEn:"Demo: Explainer on fact-check process.",
+    image:"https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?w=800&q=80", author:"Fact Check Team", source:"Methodology Sample", publishedAt:"2026-04-30 09:00", updatedAt:"2026-04-30 09:00", slug:"factcheck-explainer-demo"
+  },
+  {
+    id:"12", category:"entertainment", tags:["entertainment","demo"],
+    titleHi:"राजस्थानी लोक संगीत की विरासत - डेमो फीचर", titleEn:"Legacy of Rajasthani Folk Music - Demo Feature",
+    summaryHi:"डेमो: लोक संगीत पर नमूना फीचर।",
+    summaryEn:"Demo: Sample feature on folk music.",
+    image:"https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80", author:"Culture Desk", source:"Demo", publishedAt:"2026-04-29 19:00", updatedAt:"2026-04-29 19:00", slug:"rajasthani-folk-demo"
+  }
+];
+
+let state = {
+  lang: localStorage.getItem('ks_lang') || 'hi',
+  theme: localStorage.getItem('ks_theme') || 'light',
+  activeCat: 'home',
+  activeSub: 'all',
+  searchQ: '',
+  selectedArticle: null
+};
+
+function t(key){ return STR[state.lang][key] || key; }
+
+function init(){
+  document.documentElement.setAttribute('data-theme', state.theme);
+  renderLangSwitch();
+  renderCategories();
+  renderAll();
+  bindEvents();
+  updateTexts();
+}
+
+function renderLangSwitch(){
+  const wrap = document.getElementById('langSwitch');
+  if(!wrap) return;
+  wrap.innerHTML = `<button data-lang="hi" class="${state.lang==='hi'?'active':''}">हिंदी</button><button data-lang="en" class="${state.lang==='en'?'active':''}">English</button>`;
+  wrap.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      state.lang = b.dataset.lang;
+      localStorage.setItem('ks_lang', state.lang);
+      renderLangSwitch();
+      renderAll();
+      updateTexts();
+    })
+  })
+}
+
+function renderCategories(){
+  const inner = document.getElementById('catInner');
+  if(!inner) return;
+  inner.innerHTML = CATEGORIES.map(c=>{
+    const label = state.lang==='hi'?c.hi:c.en;
+    return `<button class="cat-btn ${state.activeCat===c.key?'active':''}" data-cat="${c.key}">${label}</button>`
+  }).join('');
+  inner.querySelectorAll('.cat-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      state.activeCat = btn.dataset.cat;
+      state.activeSub = 'all';
+      renderCategories();
+      renderAll();
+      // close drawer
+      closeDrawer();
+    })
+  });
+  // drawer categories
+  const drawerGrid = document.getElementById('drawerCats');
+  if(drawerGrid){
+    drawerGrid.innerHTML = CATEGORIES.map(c=>{
+      const label = state.lang==='hi'?c.hi:c.en;
+      return `<button class="cat-btn ${state.activeCat===c.key?'active':''}" data-cat="${c.key}">${label}</button>`
+    }).join('');
+    drawerGrid.querySelectorAll('button').forEach(b=>{
+      b.addEventListener('click',()=>{
+        state.activeCat = b.dataset.cat;
+        renderCategories();
+        renderAll();
+        closeDrawer();
+        window.scrollTo({top:0, behavior:'smooth'});
+      })
+    })
+  }
+}
+
+function filteredArticles(){
+  let list = [...ARTICLES];
+  const q = state.searchQ.trim().toLowerCase();
+  if(state.activeCat!=='home' && state.activeCat!=='breaking'){
+    list = list.filter(a=>a.category===state.activeCat || (state.activeCat==='education' && ['neet','jee'].includes(a.category)) );
+  }
+  if(state.activeSub!=='all'){
+    list = list.filter(a=> (a.tags||[]).includes(state.activeSub) || a.category===state.activeSub);
+  }
+  if(q){
+    list = list.filter(a=>{
+      const hay = (a.titleHi + ' ' + a.titleEn + ' ' + a.category + ' ' + (a.tags||[]).join(' ')).toLowerCase();
+      return hay.includes(q);
+    })
+  }
+  return list;
+}
+
+function cardHTML(a){
+  const title = state.lang==='hi'?a.titleHi:a.titleEn;
+  const summary = state.lang==='hi'?a.summaryHi:a.summaryEn;
+  return `<article class="card" data-id="${a.id}" tabindex="0" role="button" aria-label="${title}">
+    <img loading="lazy" src="${a.image}" alt="${title}">
+    <div class="card-body">
+      <div class="card-cat">${a.category.toUpperCase()} • <span style="background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:999px;font-size:9px">${t('demo')}</span></div>
+      <div class="card-title">${title}</div>
+      <div class="card-desc">${summary}</div>
+      <div class="meta card-meta"><span>📅 ${a.publishedAt}</span><span>• ${a.author}</span></div>
+    </div>
+  </article>`;
+}
+
+function renderAll(){
+  const list = filteredArticles();
+  // Hero
+  const heroMain = document.getElementById('heroMain');
+  const heroSide = document.getElementById('heroSide');
+  if(heroMain && heroSide){
+    if(list.length>0){
+      const main = list[0];
+      const title = state.lang==='hi'?main.titleHi:main.titleEn;
+      const summary = state.lang==='hi'?main.summaryHi:main.summaryEn;
+      heroMain.innerHTML = `<img loading="lazy" src="${main.image}" alt="${title}"><div class="hero-overlay"><span class="badge-demo">⚠️ ${t('demo')} • ${t('liveUnavailable')}</span><br><span class="cat-label">${main.category.toUpperCase()}</span><h1 class="hero-title">${title}</h1><p class="hero-summary">${summary}</p><div class="meta dark"><span>📅 ${main.publishedAt}</span><span>✍️ ${main.author}</span><span style="margin-left:auto;background:white;color:#0f172a;padding:4px 10px;border-radius:999px;font-weight:800;font-size:11px">${t('readMore')} →</span></div></div>`;
+      heroMain.onclick = ()=>openArticle(main.id);
+      const sideList = list.slice(1,5);
+      heroSide.innerHTML = sideList.map(a=>cardHTML(a)).join('');
+      heroSide.querySelectorAll('.card').forEach(el=>{
+        el.addEventListener('click',()=>openArticle(el.dataset.id));
+        el.addEventListener('keydown',(e)=>{ if(e.key==='Enter') openArticle(el.dataset.id); })
+      });
+      heroMain.addEventListener('keydown',(e)=>{ if(e.key==='Enter') openArticle(main.id); });
+      heroMain.setAttribute('tabindex','0');
+      heroMain.setAttribute('role','button');
+    }
+  }
+
+  // Sections
+  renderSection('indiaSectionGrid','india');
+  renderSection('worldSectionGrid','world');
+  renderSection('rajasthanSectionGrid','rajasthan', true);
+  renderSection('educationSectionGrid','education');
+  renderSection('neetSectionGrid','neet', true);
+  renderSection('resultsSectionGrid','results');
+  renderSection('jobsSectionGrid','jobs');
+  renderSection('techSectionGrid','technology');
+  renderSection('sportsSectionGrid','sports');
+  renderSection('entertainmentSectionGrid','entertainment');
+  renderSection('factcheckSectionGrid','factcheck');
+
+  // 4 cards grid below hero
+  const grid4 = document.getElementById('grid4');
+  if(grid4){
+    const rest = list.slice(5,9);
+    if(rest.length===0){
+      grid4.innerHTML = `<div class="empty">${t('emptyCat')}</div>`;
+    }else{
+      grid4.innerHTML = rest.map(a=>cardHTML(a)).join('');
+      grid4.querySelectorAll('.card').forEach(el=>el.addEventListener('click',()=>openArticle(el.dataset.id)));
+    }
+  }
+
+  // Trending
+  const trending = document.getElementById('trendingList');
+  if(trending){
+    const trendList = [...ARTICLES].slice(0,8);
+    trending.innerHTML = trendList.map((a,i)=>{
+      const title = state.lang==='hi'?a.titleHi:a.titleEn;
+      return `<div class="trending-item" data-id="${a.id}" style="cursor:pointer"><div class="tr-num">0${i+1}</div><div><div style="font-size:13px;font-weight:700;line-height:1.3">${title}</div><div style="font-size:11px;color:var(--text-soft);margin-top:4px">${a.category} • ${a.publishedAt}</div></div></div>`
+    }).join('');
+    trending.querySelectorAll('.trending-item').forEach(el=>el.addEventListener('click',()=>openArticle(el.dataset.id)));
+  }
+
+  // Live updates
+  const liveBox = document.getElementById('liveList');
+  if(liveBox){
+    liveBox.innerHTML = ARTICLES.slice(0,5).map(a=>{
+      const title = state.lang==='hi'?a.titleHi:a.titleEn;
+      return `<div class="live-item"><div class="live-dot"></div><div><div style="font-size:11px;color:var(--text-soft)">${a.publishedAt} • ${t('demo')}</div><div style="font-size:13px;font-weight:600;margin-top:2px">${title}</div></div></div>`
+    }).join('');
+  }
+
+  // Search results info
+  const searchInfo = document.getElementById('searchInfo');
+  if(searchInfo){
+    if(state.searchQ){
+      searchInfo.textContent = `${list.length} results for "${state.searchQ}"`;
+      searchInfo.classList.remove('hidden');
+    }else{
+      searchInfo.classList.add('hidden');
+    }
+  }
+}
+
+function renderSection(id, catKey, isProminent){
+  const el = document.getElementById(id);
+  if(!el) return;
+  let list = ARTICLES.filter(a=>a.category===catKey);
+  if(catKey==='education') list = ARTICLES.filter(a=>['education','neet','jee'].includes(a.category));
+  // search also applies
+  const q = state.searchQ.trim().toLowerCase();
+  if(q){
+    list = list.filter(a=>{
+      const hay = (a.titleHi + ' ' + a.titleEn + ' ' + a.category + ' ' + (a.tags||[]).join(' ')).toLowerCase();
+      return hay.includes(q);
+    })
+  }
+  // subtab filter for rajasthan
+  if(isProminent && state.activeSub!=='all' && catKey==='rajasthan'){
+    list = list.filter(a=>a.tags.includes(state.activeSub));
+  }
+  if(list.length===0){
+    el.innerHTML = `<div class="empty">${t('emptyCat')}</div>`;
+    return;
+  }
+  el.innerHTML = list.slice(0,4).map(a=>cardHTML(a)).join('');
+  el.querySelectorAll('.card').forEach(card=>card.addEventListener('click',()=>openArticle(card.dataset.id)));
+}
+
+function openArticle(id){
+  const a = ARTICLES.find(x=>x.id===id);
+  if(!a) return;
+  state.selectedArticle = a;
+  const overlay = document.getElementById('articleOverlay');
+  const sheet = document.getElementById('articleSheet');
+  const title = state.lang==='hi'?a.titleHi:a.titleEn;
+  const summary = state.lang==='hi'?a.summaryHi:a.summaryEn;
+  const related = ARTICLES.filter(x=>x.id!==a.id && (x.category===a.category || x.tags.some(t=>a.tags.includes(t)))).slice(0,4);
+  sheet.innerHTML = `
+    <div class="article-head">
+      <button id="backBtn" class="icon-btn" aria-label="Back">←</button>
+      <div style="font-size:12px;color:var(--text-soft);flex:1">${a.category.toUpperCase()} • <span style="background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:999px">${t('demo')}</span></div>
+      <button id="closeArticle" class="icon-btn" aria-label="Close">✕</button>
+    </div>
+    <div class="article-body">
+      <div class="notice">⚠️ ${t('demo')}: ${t('liveUnavailable')} This article is sample content for design demonstration only. No real government announcement, result or recruitment is claimed.</div>
+      <h1 style="font-size:26px;line-height:1.2;letter-spacing:-.6px;margin:10px 0">${title}</h1>
+      <p style="color:var(--text-soft);font-size:14px">${summary}</p>
+      <div class="meta" style="margin:12px 0;flex-wrap:wrap">
+        <span>👤 ${t('author')}: ${a.author}</span>
+        <span>🏷️ ${t('source')}: ${a.source}</span>
+        <span>📅 ${t('published')}: ${a.publishedAt}</span>
+        <span>🔄 ${t('updated')}: ${a.updatedAt}</span>
+      </div>
+      <img loading="lazy" src="${a.image}" alt="${title}">
+      <p>${summary} Lorem ipsum demo content - this is intentionally generic placeholder text to show article layout, typography and spacing. Real news integration will replace this with API data when available.</p>
+      <p>${state.lang==='hi'?'यह लेख केवल डिज़ाइन डेमो के लिए है। किसी भी वास्तविक समाचार, परीक्षा तिथि या सरकारी घोषणा का दावा नहीं करता।':'This article is for design demo only and does not claim any real news, exam date or government announcement.'}</p>
+      <h2>${t('share')}</h2>
+      <div class="share-row">
+        <button class="share-btn" data-share="copy">🔗 Copy Link</button>
+        <button class="share-btn" data-share="whatsapp">💬 WhatsApp</button>
+        <button class="share-btn" data-share="x">𝕏 X / Twitter</button>
+        <button class="share-btn" data-share="facebook">📘 Facebook</button>
+      </div>
+      <h2 style="margin-top:18px">${t('related')}</h2>
+      <div class="related-grid">
+        ${related.map(r=>{
+          const rt = state.lang==='hi'?r.titleHi:r.titleEn;
+          return `<div class="card" data-id="${r.id}"><img loading="lazy" src="${r.image}" alt="${rt}" style="height:120px"><div class="card-body"><div class="card-title" style="font-size:14px">${rt}</div></div></div>`
+        }).join('')}
+      </div>
+      <div class="ad" style="margin-top:18px"><!-- AdSense In-Article Ad Placeholder - Insert Google AdSense code here --><div>AD PLACEHOLDER - IN-ARTICLE</div></div>
+    </div>
+  `;
+  overlay.classList.add('open');
+  document.body.style.overflow='hidden';
+  sheet.querySelectorAll('[data-id]').forEach(el=>el.addEventListener('click',()=>{ overlay.scrollTop=0; openArticle(el.dataset.id); }));
+  document.getElementById('closeArticle').addEventListener('click', closeArticle);
+  document.getElementById('backBtn').addEventListener('click', closeArticle);
+  sheet.querySelectorAll('[data-share]').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const url = location.origin + location.pathname + '#'+a.slug;
+      if(b.dataset.share==='copy'){ navigator.clipboard.writeText(url).then(()=>{ b.textContent='✓ Copied'; setTimeout(()=>b.textContent='🔗 Copy Link',1500); }); }
+      else if(b.dataset.share==='whatsapp'){ window.open('https://wa.me/?text='+encodeURIComponent(title+' '+url), '_blank'); }
+      else if(b.dataset.share==='x'){ window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(title)+'&url='+encodeURIComponent(url), '_blank'); }
+      else if(b.dataset.share==='facebook'){ window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url), '_blank'); }
+    })
+  });
+}
+
+function closeArticle(){
+  const overlay = document.getElementById('articleOverlay');
+  overlay.classList.remove('open');
+  document.body.style.overflow='';
+  state.selectedArticle=null;
+}
+
+function bindEvents(){
+  // Search
+  const searchInput = document.getElementById('searchInput');
+  const searchBtn = document.getElementById('searchBtn');
+  if(searchInput){
+    searchInput.addEventListener('input',(e)=>{
+      state.searchQ = e.target.value;
+      renderAll();
+    });
+    searchInput.addEventListener('keydown',(e)=>{
+      if(e.key==='Enter'){ state.searchQ = e.target.value; renderAll(); }
+    });
+  }
+  if(searchBtn){
+    searchBtn.addEventListener('click',()=>{
+      state.searchQ = searchInput.value;
+      renderAll();
+      document.getElementById('mainContent')?.scrollIntoView({behavior:'smooth'});
+    })
+  }
+  // Theme
+  const themeBtn = document.getElementById('themeBtn');
+  if(themeBtn){
+    themeBtn.addEventListener('click',()=>{
+      state.theme = state.theme==='light'?'dark':'light';
+      localStorage.setItem('ks_theme', state.theme);
+      document.documentElement.setAttribute('data-theme', state.theme);
+      updateTexts();
+    })
+  }
+  // Mobile drawer
+  const hamb = document.getElementById('hamburger');
+  const drawer = document.getElementById('mobileDrawer');
+  const drawerBackdrop = document.getElementById('drawerBackdrop');
+  const closeDrawerBtn = document.getElementById('closeDrawer');
+  if(hamb) hamb.addEventListener('click',()=>{ drawer.classList.add('open'); });
+  if(drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
+  if(closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeDrawer);
+
+  // Subtabs Rajasthan
+  document.querySelectorAll('[data-subtab-group="rajasthan"] .subtab').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('[data-subtab-group="rajasthan"] .subtab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      state.activeSub = btn.dataset.sub;
+      renderSection('rajasthanSectionGrid','rajasthan', true);
+    })
+  });
+  // Subtabs NEET
+  document.querySelectorAll('[data-subtab-group="neet"] .subtab').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('[data-subtab-group="neet"] .subtab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      // simple filter by tag for demo
+      const grid = document.getElementById('neetSectionGrid');
+      let list = ARTICLES.filter(a=>a.category==='neet' || a.tags.includes('neet'));
+      if(btn.dataset.sub!=='all'){
+        list = ARTICLES.filter(a=>a.tags.includes(btn.dataset.sub) || a.category===btn.dataset.sub);
+      }
+      if(list.length===0) grid.innerHTML = `<div class="empty">${t('emptyCat')}</div>`;
+      else grid.innerHTML = list.slice(0,4).map(a=>cardHTML(a)).join('');
+      grid.querySelectorAll('.card').forEach(card=>card.addEventListener('click',()=>openArticle(card.dataset.id)));
+    })
+  });
+
+  // Overlay click to close
+  const overlay = document.getElementById('articleOverlay');
+  if(overlay){
+    overlay.addEventListener('click',(e)=>{
+      if(e.target===overlay) closeArticle();
+    })
+  }
+  document.addEventListener('keydown',(e)=>{
+    if(e.key==='Escape') { closeArticle(); closeDrawer(); }
+  })
+}
+
+function closeDrawer(){
+  document.getElementById('mobileDrawer')?.classList.remove('open');
+}
+
+function updateTexts(){
+  // placeholders
+  const searchInput = document.getElementById('searchInput');
+  if(searchInput) searchInput.placeholder = t('searchPlaceholder');
+  const themeBtn = document.getElementById('themeBtn');
+  if(themeBtn) themeBtn.textContent = state.theme==='light'?'🌙 '+t('dark'):'☀️ '+t('light');
+  // static labels
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.dataset.i18n;
+    if(STR[state.lang][key]) el.textContent = t(key);
+  });
+  // footer etc already dynamic via render
+}
+
+document.addEventListener('DOMContentLoaded', init);

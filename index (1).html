@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<title>KhabarSetu - हर खबर, एक जगह | Every Story, One Place</title>
+<meta name="description" content="KhabarSetu - हर खबर, एक जगह। India, Rajasthan, NEET, Education, Results, Government Jobs, Technology, Sports, Entertainment का विश्वसनीय bilingual news portal। Demo content for GitHub Pages deployment.">
+<link rel="canonical" href="https://YOURUSERNAME.github.io/">
+<meta name="theme-color" content="#0f172a">
+<meta property="og:title" content="KhabarSetu - हर खबर, एक जगह">
+<meta property="og:description" content="Every Story, One Place - Bilingual Indian News Portal covering India, Rajasthan, NEET, Education and more. Demo for GitHub Pages.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://YOURUSERNAME.github.io/">
+<meta property="og:image" content="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KhabarSetu">
+<meta name="twitter:description" content="Bilingual Indian News Portal - Demo Content">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"NewsMediaOrganization",
+  "name":"KhabarSetu",
+  "url":"https://YOURUSERNAME.github.io/",
+  "logo":{"@type":"ImageObject","url":"https://YOURUSERNAME.github.io/favicon.svg"},
+  "description":"Bilingual Indian News Portal"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"KhabarSetu",
+  "url":"https://YOURUSERNAME.github.io/",
+  "potentialAction":{"@type":"SearchAction","target":"https://YOURUSERNAME.github.io/?q={search_term_string}","query-input":"required name=search_term_string"}
+}
+</script>
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <div class="header-top">
+      <a href="index.html" class="brand" aria-label="KhabarSetu Home">
+        <div class="logo-mark">KS</div>
+        <div class="brand-text"><b>KHABARSETU</b><span>हर खबर, एक जगह</span></div>
+      </a>
+      <div class="header-actions">
+        <div id="langSwitch" class="lang-switch" aria-label="Language switch"></div>
+        <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">🌙 Dark</button>
+        <button id="searchBtn" class="icon-btn" aria-label="Search" onclick="document.getElementById('searchInput').focus()">🔍</button>
+        <button id="hamburger" class="icon-btn" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </div>
+  <div class="cat-nav"><div class="container"><div id="catInner" class="cat-inner"></div></div></div>
+</header>
+
+<div class="ticker" role="region" aria-label="Breaking news ticker">
+  <div class="ticker-badge"><span style="width:8px;height:8px;background:white;border-radius:50%;display:inline-block"></span> <span data-i18n="breaking">BREAKING</span> <em>DEMO</em></div>
+  <div class="ticker-track">
+    <span class="ticker-item">⚠️ Demo Content: Live news data is currently unavailable. - KhabarSetu sample ticker <em>DEMO</em></span>
+    <span class="ticker-item">📍 राजस्थान डेमो: Jaipur heritage festival sample update <em>DEMO</em></span>
+    <span class="ticker-item">📚 NEET Demo Guide: Understanding exam pattern - sample content only <em>DEMO</em></span>
+    <span class="ticker-item">💼 Govt Jobs Demo: How to apply - no real recruitment <em>DEMO</em></span>
+    <span class="ticker-item">⚠️ Demo Content: Live news data is currently unavailable. - KhabarSetu sample ticker <em>DEMO</em></span>
+    <span class="ticker-item">📍 राजस्थान डेमो: Jaipur heritage festival sample update <em>DEMO</em></span>
+    <span class="ticker-item">📚 NEET Demo Guide: Understanding exam pattern - sample content only <em>DEMO</em></span>
+    <span class="ticker-item">💼 Govt Jobs Demo: How to apply - no real recruitment <em>DEMO</em></span>
+  </div>
+</div>
+
+<main id="mainContent" class="container">
+  <div class="notice" role="status">⚠️ <div><b data-i18n="demo">Demo Content</b> - <span data-i18n="liveUnavailable">Live news data is currently unavailable.</span> All articles below are sample content for design demonstration on GitHub Pages. No real breaking news, exam dates, results or government jobs are claimed.</div></div>
+
+  <div style="display:flex;gap:12px;align-items:center;margin:10px 0 6px;flex-wrap:wrap">
+    <div class="search-bar"><input id="searchInput" type="search" placeholder="KhabarSetu पर खोजें" aria-label="Search"><button id="searchBtn2" aria-label="Search">🔍</button></div>
+    <div id="searchInfo" class="hidden" style="font-size:13px;color:var(--text-soft)"></div>
+  </div>
+
+  <div class="ad" style="margin:10px 0"><!-- AdSense Top Banner Placeholder - Insert Google AdSense code here --><div>AD PLACEHOLDER - TOP BANNER 728x90</div></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div id="heroMain" class="hero-main"></div>
+    <div id="heroSide" class="hero-side"></div>
+  </section>
+
+  <div id="grid4" class="card-grid"></div>
+
+  <div class="layout-3">
+    <div>
+      <!-- INDIA -->
+      <section id="india" class="section"><div class="section-head"><h2 class="section-title" data-i18n="india">India</h2><a href="#" class="kwd" onclick="event.preventDefault(); state.activeCat='india'; renderCategories(); renderAll(); window.scrollTo({top:0,behavior:'smooth'})">View All →</a></div><div id="indiaSectionGrid" class="card-grid" style="grid-template-columns:repeat(2,1fr)"></div></section>
+
+      <div class="ad" style="margin:10px 0"><!-- AdSense In-Content --><div>AD PLACEHOLDER - IN CONTENT</div></div>
+
+      <!-- RAJASTHAN PROMINENT -->
+      <section id="rajasthan" class="section"><div class="prominent-block"><div class="section-head"><h2 class="section-title prominent" data-i18n="rajasthan">Rajasthan - Prominent</h2><span style="font-size:11px;background:var(--primary);color:white;padding:4px 10px;border-radius:999px">TARGET AUDIENCE</span></div><div class="subtabs" data-subtab-group="rajasthan"><button class="subtab active" data-sub="all">All</button><button class="subtab" data-sub="jaipur">Jaipur</button><button class="subtab" data-sub="dausa">Dausa</button><button class="subtab" data-sub="alwar">Alwar</button><button class="subtab" data-sub="udaipur">Udaipur</button><button class="subtab" data-sub="jodhpur">Jodhpur</button><button class="subtab" data-sub="kota">Kota</button></div><div id="rajasthanSectionGrid" class="card-grid" style="margin-top:12px"></div></div></section>
+
+      <!-- WORLD -->
+      <section id="world" class="section"><div class="section-head"><h2 class="section-title" data-i18n="world">World</h2></div><div id="worldSectionGrid" class="card-grid" style="grid-template-columns:repeat(2,1fr)"></div></section>
+
+      <!-- EDUCATION -->
+      <section id="education" class="section"><div class="section-head"><h2 class="section-title" data-i18n="education">Education</h2></div><div id="educationSectionGrid" class="card-grid"></div></section>
+
+      <!-- NEET PROMINENT -->
+      <section id="neet" class="section"><div class="prominent-block" style="border-color:#dc2626"><div class="section-head"><h2 class="section-title prominent" style="color:var(--accent)" data-i18n="neet">NEET Hub - Prominent</h2><span style="font-size:11px;background:#dc2626;color:white;padding:4px 10px;border-radius:999px">EDUCATION HUB</span></div><div class="subtabs" data-subtab-group="neet"><button class="subtab active" data-sub="all">All</button><button class="subtab" data-sub="neet">NEET News</button><button class="subtab" data-sub="jee">JEE</button><button class="subtab" data-sub="cuet">CUET</button><button class="subtab" data-sub="admit">Admit Card</button><button class="subtab" data-sub="results">Results</button></div><div id="neetSectionGrid" class="card-grid" style="margin-top:12px"></div><div class="notice" style="margin-top:12px">⚠️ NEET related dates, cutoffs and results are demo placeholders. No official NTA announcement is claimed. Visit nta.ac.in for official info.</div></div></section>
+
+      <!-- RESULTS -->
+      <section id="results" class="section"><div class="section-head"><h2 class="section-title" data-i18n="results">Results</h2></div><div id="resultsSectionGrid" class="card-grid"></div></section>
+
+      <!-- JOBS -->
+      <section id="jobs" class="section"><div class="section-head"><h2 class="section-title" data-i18n="jobs">Government Jobs</h2></div><div id="jobsSectionGrid" class="card-grid"></div></section>
+
+      <!-- TECH -->
+      <section id="technology" class="section"><div class="section-head"><h2 class="section-title" data-i18n="technology">Technology</h2></div><div id="techSectionGrid" class="card-grid"></div></section>
+
+      <!-- SPORTS -->
+      <section id="sports" class="section"><div class="section-head"><h2 class="section-title" data-i18n="sports">Sports</h2></div><div id="sportsSectionGrid" class="card-grid"></div></section>
+
+      <!-- ENTERTAINMENT -->
+      <section id="entertainment" class="section"><div class="section-head"><h2 class="section-title" data-i18n="entertainment">Entertainment</h2></div><div id="entertainmentSectionGrid" class="card-grid"></div></section>
+
+      <!-- FACT CHECK -->
+      <section id="factcheck" class="section"><div class="section-head"><h2 class="section-title" data-i18n="factCheck">Fact Check</h2></div><div id="factcheckSectionGrid" class="card-grid"></div></section>
+    </div>
+
+    <aside class="sidebar">
+      <div class="panel"><h3 data-i18n="live">Live Updates</h3><div class="notice" style="margin:0 0 10px">Live news data is currently unavailable. Sample list below.</div><div id="liveList"></div></div>
+      <div class="ad"><!-- Sidebar Ad --><div>AD PLACEHOLDER<br>SIDEBAR 300x250<br><!-- AdSense Sidebar --></div></div>
+      <div class="panel"><h3 data-i18n="trending">Trending Now</h3><div style="font-size:11px;color:var(--text-soft);margin-bottom:8px" data-i18n="popular">Popular on KhabarSetu</div><div id="trendingList"></div></div>
+      <div class="panel"><h3 data-i18n="mostRead">Most Read</h3><div id="mostReadList"></div></div>
+    </aside>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="brand" style="margin-bottom:10px"><div class="logo-mark">KS</div><div class="brand-text"><b>KHABARSETU</b><span>हर खबर, एक जगह | Every Story, One Place</span></div></div><p style="font-size:13px;color:var(--text-soft)">A bilingual Indian news platform for GitHub Pages demo. All content marked as Demo Content. No real news, results or recruitments claimed.</p><div style="display:flex;gap:8px;margin-top:12px"><a href="#" class="icon-btn">▶️</a><a href="#" class="icon-btn">📷</a><a href="#" class="icon-btn">f</a><a href="#" class="icon-btn">𝕏</a></div></div>
+      <div><h4 style="font-size:13px;margin-bottom:8px">Company</h4><a href="about.html">About Us</a><a href="contact.html">Contact Us</a><a href="editorial-policy.html">Editorial Policy</a></div>
+      <div><h4 style="font-size:13px;margin-bottom:8px">Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a href="disclaimer.html">Disclaimer</a></div>
+      <div><h4 style="font-size:13px;margin-bottom:8px" data-i18n="categories">Categories</h4><a href="#india">India</a><a href="#rajasthan">Rajasthan</a><a href="#neet">NEET</a><a href="#results">Results</a><a href="#jobs">Government Jobs</a></div>
+    </div>
+    <div class="copy"><span>© 2026 KhabarSetu. All rights reserved. Demo for GitHub Pages.</span><span>Built with HTML + CSS + Vanilla JS • No server required</span></div>
+  </div>
+</footer>
+
+<!-- Mobile Drawer -->
+<div id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+  <div id="drawerBackdrop" class="drawer-backdrop"></div>
+  <div class="drawer-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center"><b>Menu</b><button id="closeDrawer" class="icon-btn">✕</button></div>
+    <div style="margin-top:14px"><div class="search-bar"><input id="drawerSearch" type="search" placeholder="Search..."></div></div>
+    <div style="margin-top:14px;font-size:12px;font-weight:800;letter-spacing:.6px;color:var(--text-soft)">CATEGORIES</div>
+    <div id="drawerCats" class="drawer-grid"></div>
+    <div style="margin-top:18px;font-size:12px"><a href="about.html" style="display:block;padding:8px 0;border-bottom:1px solid var(--border)">About Us</a><a href="contact.html" style="display:block;padding:8px 0;border-bottom:1px solid var(--border)">Contact</a><a href="privacy.html" style="display:block;padding:8px 0">Privacy Policy</a></div>
+  </div>
+</div>
+
+<!-- Article Overlay -->
+<div id="articleOverlay" class="article-overlay" role="dialog" aria-modal="true"><div id="articleSheet" class="article-sheet"></div></div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
