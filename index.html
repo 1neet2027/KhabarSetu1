@@ -189,10 +189,6 @@ button{font-family:inherit;cursor:pointer}
 .footer a:hover{color:var(--text)}
 .copy{margin-top:18px;padding-top:14px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--text-soft)}
 
-/* Ad placeholder */
-.ad{border:1px dashed #cbd5e1;background:repeating-linear-gradient(45deg,#f8fafc,#f8fafc 10px,#ffffff 10px,#ffffff 20px);border-radius:12px;padding:10px;text-align:center;color:#64748b;font-size:11px;letter-spacing:.6px;font-weight:700}
-[data-theme="dark"] .ad{background:repeating-linear-gradient(45deg,#0f172a,#0f172a 10px,#1e293b 10px,#1e293b 20px);border-color:#334155;color:#94a3b8}
-
 /* Utilities */
 .skeleton{background:linear-gradient(90deg,var(--bg-soft),var(--border),var(--bg-soft));background-size:200% 100%;animation:shim 1.2s infinite}
 @keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
@@ -460,7 +456,15 @@ const CATEGORIES = [
 // Demo articles - clearly marked, no fake real news claims
 const ARTICLES = [
   {
-    id:"1", category:"india", tags:["india","politics","demo"],
+   {
+    id:"100", category:"sports", tags:["sports","【entity-virat-kohli¦canonical_name=Virat Kohli】","world-cup","india","breaking"],
+    titleHi: "विराट कोहली का बड़ा ऐलान: 2027 वर्ल्ड कप होगा भारत के लिए आखिरी World Cup",
+    titleEn: "Virat Kohli confirms 2027 World Cup will be his last for India",
+    summaryHi: "विराट कोहली ने पुष्टि की है कि 2027 ICC Men’s Cricket World Cup भारत के लिए उनका आखिरी World Cup होगा। कोहली ने JioStar के साथ बातचीत में कहा कि उनका लक्ष्य इस टूर्नामेंट में भारत के लिए World Cup जीतना है। 2027 World Cup दक्षिण अफ्रीका, जिम्बाब्वे और नामीबिया में होगा। World Cup में 37 मैचों में 1,795 रन, 5 शतक और 12 अर्धशतक।",
+    summaryEn: "Virat Kohli confirmed that 2027 ICC Men's Cricket World Cup will be his last World Cup for India. He told JioStar that his goal is to win the tournament for India. 2027 edition will be in South Africa, Zimbabwe and Namibia. Kohli has 1795 runs in 37 World Cup matches.",
+    image:"https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&q=80", author:"KhabarSetu Desk", source:"ICC Cricket / 【entity-Reuters¦canonical_name=Reuters】 / JioStar interview", publishedAt:"2026-09-26 11:00", updatedAt:"2026-09-26 11:00", slug:"virat-kohli-last-world-cup-2027-announcement"
+  }, 
+  id:"1", category:"india", tags:["india","politics","demo"],
     titleHi:"भारत में डिजिटल शिक्षा को बढ़ावा - डेमो रिपोर्ट", titleEn:"Digital Education Push in India - Demo Report",
     summaryHi:"यह डेमो कंटेंट है। वास्तविक लाइव डेटा उपलब्ध नहीं है। शिक्षा मंत्रालय के डिजिटल पहल पर नमूना सारांश।",
     summaryEn:"This is demo content. Live news data is currently unavailable. Sample summary on digital education initiative.",
